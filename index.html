@@ -3,14 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>BGG App</title>
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#121212" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <style>
 
-    /* ─── Reset & Base ─────────────────────────────────────────── */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -21,23 +16,15 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #000;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    /* ─── Loading Screen Panel ─────────────────────────────────── */
-    /* COMMENTED OUT: loading screen panel
+    /* ── Loading Screen ───────────────────────────────────────────
     #loading-screen {
       position: fixed;
       inset: 0;
       width: 100vw;
-      height: 100vh;
       height: 100dvh;
-      background: #121212;
       z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       transform: translateY(100%);
       animation: slideUp 0.4s ease forwards;
     }
@@ -45,22 +32,14 @@
     #loading-screen.dismiss {
       animation: slideDown 0.4s ease forwards;
     }
+    ──────────────────────────────────────────────────────────── */
 
-    .loading-text {
-      color: #fff;
-      font-size: 1.2rem;
-      letter-spacing: 0.05em;
-    }
-    */
-
-    /* ─── Main Panel ───────────────────────────────────────────── */
+    /* ── Main Panel ─────────────────────────────────────────────── */
     #main-panel {
       position: fixed;
       inset: 0;
       width: 100vw;
-      height: 100vh;
-      height: 100dvh;           /* dynamic viewport height for mobile */
-      background: #121212;
+      height: 100dvh;
       z-index: 10;
       display: flex;
       flex-direction: column;
@@ -72,7 +51,7 @@
       animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    /* ─── Slide Animations ─────────────────────────────────────── */
+    /* ── Slide Animations ───────────────────────────────────────── */
     @keyframes slideUp {
       from { transform: translateY(100%); }
       to   { transform: translateY(0);    }
@@ -83,119 +62,59 @@
       to   { transform: translateY(100%); }
     }
 
-    /* ─── Three Boxes ──────────────────────────────────────────── */
+    /* ── Three Boxes ────────────────────────────────────────────── */
     .box {
       flex: 1;
-      border-radius: 16px;
-      margin: 6px 12px;
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
-      position: relative;
     }
 
-    /* First and last box get extra margin for top/bottom edge */
-    .box:first-child { margin-top: 12px;  }
-    .box:last-child  { margin-bottom: 12px; }
-
-    .box-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 12px 16px 4px;
-      opacity: 0.5;
-      color: #fff;
-    }
-
-    /* ─── EXP Box (Top) ────────────────────────────────────────── */
+    /* ── EXP Box ────────────────────────────────────────────────── */
     #exp-box {
-      background: #1e1e2e;
-      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    /* ─── Games Played Box (Middle) ────────────────────────────── */
+    /* ── Games Played Box ───────────────────────────────────────── */
     #games-played-box {
-      background: #1a1a2a;
-      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    /* ─── Mechanics Box (Bottom) ───────────────────────────────── */
+    /* ── Mechanics Box ──────────────────────────────────────────── */
     #mechanics-box {
-      background: #1a2a1a;
-      border: 1px solid rgba(255,255,255,0.06);
-      flex: 1.4;               /* slightly taller than the other two */
     }
 
     #mechanics-list {
-      flex: 1;
+      height: 100%;
       overflow-y: auto;
-      padding: 4px 16px 16px;
-      /* Mechanics items will be populated here later */
     }
-
-    /* ─── Mechanics item style (ready for when list is provided) ─ */
-    .mechanic-item {
-      padding: 10px 12px;
-      margin: 4px 0;
-      border-radius: 8px;
-      color: #e0e0e0;
-      font-size: 0.9rem;
-      background: rgba(255,255,255,0.05);
-      cursor: pointer;
-      transition: background 0.15s ease;
-
-      /* COMMENTED OUT: interaction handler attached in JS
-      pointer-events: auto;
-      */
-      pointer-events: none;     /* non-interactive until spec confirmed */
-    }
-
-    /* COMMENTED OUT: mechanic item hover/active interaction
-    .mechanic-item:hover  { background: rgba(255,255,255,0.10); }
-    .mechanic-item:active { background: rgba(255,255,255,0.15); }
-    .mechanic-item.selected {
-      background: rgba(100,220,100,0.15);
-      border: 1px solid rgba(100,220,100,0.3);
-    }
-    */
 
   </style>
 </head>
 <body>
 
-  <!-- ─── Loading Screen Panel (commented out) ─────────────────────
-  <div id="loading-screen">
-    <span class="loading-text">Loading…</span>
-  </div>
-  ─────────────────────────────────────────────────────────────── -->
+  <!-- ── Loading Screen (commented out) ──────────────────────────
+  <div id="loading-screen"></div>
+  ──────────────────────────────────────────────────────────────── -->
 
-  <!-- ─── Main Panel ──────────────────────────────────────────── -->
+  <!-- ── Main Panel ───────────────────────────────────────────── -->
   <div id="main-panel">
 
     <!-- TOP: EXP Box -->
-    <div class="box" id="exp-box">
-      <span class="box-label">EXP</span>
-    </div>
+    <div class="box" id="exp-box"></div>
 
     <!-- MIDDLE: Games Played Box -->
-    <div class="box" id="games-played-box">
-      <span class="box-label">Games Played</span>
-    </div>
+    <div class="box" id="games-played-box"></div>
 
     <!-- BOTTOM: Mechanics Box -->
     <div class="box" id="mechanics-box">
-      <span class="box-label">Mechanics</span>
       <div id="mechanics-list">
-        <!-- Empty — full mechanics list to be provided -->
+        <!-- Empty — mechanics list to be provided -->
       </div>
     </div>
 
   </div>
 
   <script>
-    // ─── ResizeObserver — detect when main panel has finished sizing ──
-    // COMMENTED OUT: loading screen trigger
+
+    // ── ResizeObserver ─────────────────────────────────────────────
+    // COMMENTED OUT:
     /*
     let panelResized;
     const panelResizedPromise = new Promise(resolve => { panelResized = resolve; });
@@ -203,7 +122,7 @@
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         if (entry.contentRect.height > 0) {
-          panelResized();           // panel has a real size — layout complete
+          panelResized();
           resizeObserver.disconnect();
         }
       }
@@ -211,25 +130,16 @@
     resizeObserver.observe(document.getElementById("main-panel"));
     */
 
-    // ─── Asset / Data Loading Detection ──────────────────────────────
-    // COMMENTED OUT: loading detection promises
+    // ── Asset / Data Loading Detection ────────────────────────────
+    // COMMENTED OUT:
     /*
-    const dataFetched    = new Promise(resolve => {
-      // Replace with real fetch call when API is ready
-      // e.g. fetch mechanics, fetch user data etc.
-      resolve();   // placeholder — resolves immediately for now
-    });
-
-    const fontsLoaded    = document.fonts.ready;
-
-    const imagesLoaded   = new Promise(resolve => {
-      // Add image preloading here when image assets are defined
-      resolve();   // placeholder
-    });
+    const dataFetched  = new Promise(resolve => resolve());
+    const fontsLoaded  = document.fonts.ready;
+    const imagesLoaded = new Promise(resolve => resolve());
     */
 
-    // ─── Max Loading Screen Fallback (1.3 seconds) ───────────────────
-    // COMMENTED OUT: Promise.race fallback timer
+    // ── Max Loading Screen Fallback — 1.3s ────────────────────────
+    // COMMENTED OUT:
     /*
     const maxTimeout = new Promise(resolve => setTimeout(resolve, 1300));
 
@@ -239,9 +149,9 @@
           panelResizedPromise,
           dataFetched,
           fontsLoaded,
-          imagesLoaded,
+          imagesLoaded
         ]),
-        maxTimeout    // fallback: dismiss loading screen after 1.3s regardless
+        maxTimeout
       ]);
       dismissLoadingScreen();
     }
@@ -256,40 +166,23 @@
     waitForEverything();
     */
 
-    // ─── Mechanics List Population ────────────────────────────────────
-    // Empty for now — full list to be provided
+    // ── Mechanics List ─────────────────────────────────────────────
+    // Empty — full list to be provided
     const MECHANICS = [];
 
     function renderMechanics(list) {
       const container = document.getElementById("mechanics-list");
-      if (!list.length) return;   // nothing to render yet
+      if (!list.length) return;
       container.innerHTML = list.map(name => `
-        <div class="mechanic-item" data-mechanic="${name}">
-          ${name}
-        </div>
+        <div class="mechanic-item" data-mechanic="${name}">${name}</div>
       `).join("");
-
-      // COMMENTED OUT: mechanic interaction handler
-      /*
-      container.querySelectorAll(".mechanic-item").forEach(el => {
-        el.addEventListener("click", () => {
-          el.classList.toggle("selected");
-          const selected = [...container.querySelectorAll(".mechanic-item.selected")]
-            .map(e => e.dataset.mechanic);
-          console.log("Selected mechanics:", selected);
-          // TODO: trigger game search / filter by selected mechanics
-        });
-      });
-      */
     }
 
     renderMechanics(MECHANICS);
 
-    // ─── Service Worker Registration ─────────────────────────────────
+    // ── Service Worker ─────────────────────────────────────────────
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").catch(err => {
-        console.warn("Service worker registration failed:", err);
-      });
+      navigator.serviceWorker.register("/sw.js");
     }
 
   </script>
