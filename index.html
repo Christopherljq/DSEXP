@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
 
     :root {
@@ -17,7 +20,7 @@
       --wt: #fff5e0;
       --pc: #c4b090;
     }
-    
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -55,22 +58,22 @@
       z-index: 10;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
       padding: env(safe-area-inset-top, 0px)
                env(safe-area-inset-right, 0px)
                env(safe-area-inset-bottom, 0px)
                env(safe-area-inset-left, 0px);
       background:
-
+        radial-gradient(ellipse at 25% 60%, rgba(20,80,20,.95) 0%, transparent 45%),
+        radial-gradient(ellipse at 10% 80%, rgba(10,50,10,.9) 0%, transparent 35%),
         radial-gradient(ellipse at 65% 15%, rgba(80,160,200,.5) 0%, transparent 55%),
         radial-gradient(ellipse at 90% 10%, rgba(60,120,160,.4) 0%, transparent 40%),
-
+        linear-gradient(160deg, #6ab080 0%, #4a9060 20%, #2a6030 40%, #4a9060 60%, #6ab080 80%, #8ad0a0 100%);
       transform: translateY(100%);
       animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     /* ── Tree Trunk ─────────────────────────────────────────────── */
-/*    #main-panel::before {
+    #main-panel::before {
       content: "";
       position: absolute;
       left: -30px;
@@ -89,7 +92,7 @@
       pointer-events: none;
       z-index: 1;
     }
-*/
+
     /* ── Mushrooms ──────────────────────────────────────────────── */
     #mushrooms {
       position: absolute;
@@ -149,6 +152,19 @@
     <!-- Tree trunk via ::before pseudo-element -->
 
     <!-- Mushrooms -->
+    <svg id="mushrooms" width="120" height="150" viewBox="0 0 130 160" fill="none">
+      <ellipse cx="55" cy="100" rx="18" ry="28" fill="#d4c8a0" stroke="#a09060" stroke-width="1.5"/>
+      <ellipse cx="55" cy="100" rx="10" ry="26" fill="#e0d8b0"/>
+      <path d="M10 105 Q20 55 55 50 Q90 55 100 105 Q78 118 55 115 Q32 118 10 105Z" fill="#d44010"/>
+      <path d="M10 105 Q20 55 55 50 Q90 55 100 105 Q78 118 55 115 Q32 118 10 105Z" fill="none" stroke="#a03008" stroke-width="1.5"/>
+      <ellipse cx="30" cy="80" rx="8" ry="5" fill="rgba(255,255,255,0.25)" transform="rotate(-20 30 80)"/>
+      <ellipse cx="72" cy="68" rx="6" ry="4" fill="rgba(255,255,255,0.2)" transform="rotate(10 72 68)"/>
+      <ellipse cx="90" cy="128" rx="10" ry="18" fill="#d4c8a0" stroke="#a09060" stroke-width="1"/>
+      <path d="M68 130 Q75 100 90 96 Q105 100 112 130 Q102 138 90 136 Q78 138 68 130Z" fill="#e8b820"/>
+      <path d="M68 130 Q75 100 90 96 Q105 100 112 130 Q102 138 90 136 Q78 138 68 130Z" fill="none" stroke="#c09010" stroke-width="1.2"/>
+      <ellipse cx="22" cy="145" rx="7" ry="12" fill="#c8c0a0" stroke="#a09880" stroke-width="1"/>
+      <path d="M8 147 Q12 128 22 125 Q32 128 36 147 Q30 152 22 151 Q14 152 8 147Z" fill="#b0a890"/>
+    </svg>
 
     <!-- TOP: EXP Box -->
     <div class="box" id="exp-box"></div>
