@@ -7,16 +7,6 @@
   <link rel="manifest" href="manifest.json" />
   <style>
 
-    :root {
-      --w1: #d49050;
-      --w2: #8b4513;
-      --w3: #5a2e0e;
-      --w4: #2a1005;
-      --w5: #452008;
-      --ws: #1a0803;
-      --wt: #fff5e0;
-      --pc: #c4b090;
-    }
 
     *, *::before, *::after {
       box-sizing: border-box;
@@ -61,11 +51,10 @@
                env(safe-area-inset-bottom, 0px)
                env(safe-area-inset-left, 0px);
       background:
-        radial-gradient(ellipse at 25% 60%, rgba(20,80,20,.95) 0%, transparent 45%),
-        radial-gradient(ellipse at 10% 80%, rgba(10,50,10,.9) 0%, transparent 35%),
+
         radial-gradient(ellipse at 65% 15%, rgba(80,160,200,.5) 0%, transparent 55%),
         radial-gradient(ellipse at 90% 10%, rgba(60,120,160,.4) 0%, transparent 40%),
-        linear-gradient(160deg, #6ab080 0%, #4a9060 20%, #2a6030 40%, #4a9060 60%, #6ab080 80%, #8ad0a0 100%);
+
       transform: translateY(100%);
       animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
